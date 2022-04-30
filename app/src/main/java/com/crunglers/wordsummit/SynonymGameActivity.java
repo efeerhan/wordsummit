@@ -68,5 +68,9 @@ public class SynonymGameActivity extends AppCompatActivity {
         });
 
         AppCompatButton enter = (AppCompatButton)row3.getChildAt(0);
+
+        enter.setOnClickListener( v -> {
+
+        });
     }
 }
