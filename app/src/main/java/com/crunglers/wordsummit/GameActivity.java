@@ -221,6 +221,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     }
 
 
+
     @SuppressLint("DefaultLocale")
     @Override
     public void didReceiveQuery(ResultPool QueryWords) {
