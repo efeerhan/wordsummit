@@ -1,6 +1,4 @@
-package com.crunglers.wordsummit;
-
-import java.util.List;
+package com.crunglers.wordsummit.query;
 
 public interface QueryDelegate {
     public void didReceiveQuery (ResultPool queryWords);

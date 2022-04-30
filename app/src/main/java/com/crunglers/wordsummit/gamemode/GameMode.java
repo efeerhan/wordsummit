@@ -1,7 +1,10 @@
-package com.crunglers.wordsummit;
+package com.crunglers.wordsummit.gamemode;
 
 import android.content.Context;
 import com.android.volley.RequestQueue;
+import com.crunglers.wordsummit.query.QueryDelegate;
+import com.crunglers.wordsummit.query.QuerySender;
+import com.crunglers.wordsummit.query.ResultPool;
 
 import java.io.*;
 import java.nio.charset.Charset;

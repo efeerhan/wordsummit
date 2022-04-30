@@ -1,4 +1,4 @@
-package com.crunglers.wordsummit;
+package com.crunglers.wordsummit.query;
 
 import android.util.Log;
 

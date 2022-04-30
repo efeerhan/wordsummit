@@ -1,8 +1,6 @@
-package com.crunglers.wordsummit;
+package com.crunglers.wordsummit.query;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ResultPool {
     private List<WordResult> results;
