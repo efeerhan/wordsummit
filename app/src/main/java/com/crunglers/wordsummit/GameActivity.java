@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -36,12 +37,14 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     private int highscore = 0;
+    private int score = 0;
     private ResultPool roundPool = null;
     private Timer timer = new Timer();
     private int time = 20;
     private GameMode mode;
     private final int TIMER_PERIOD = 1000;
     private TextView wordsLeftView;
+    private int[] wordCount = new int[1];
     private int[] correctCount = new int[1];
 
     private class timeLoop extends TimerTask {
@@ -59,7 +62,12 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
                     time--;
                 }
                 if ( time == 0 ) {
+                    wordCount[0]++;
                     time = 20;
+                }
+                if ( wordCount[0] == 3 ) {
+                    updateHighScore();
+                    timer.cancel();
                 }
                 timerView.setText(String.format("Time: %d", time));
             });
@@ -69,7 +77,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        prefs = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        prefs = getSharedPreferences("com.crunglers.wordsummit",MODE_PRIVATE);
         editor = prefs.edit();
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -88,7 +96,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
 
         TextView highScoreValView = findViewById(R.id.highScoreValue);
         highscore = prefs.getInt(mode.getHighScoreTag(),0);
-        highScoreValView.setText(highscore);
+        highScoreValView.setText(Integer.toString(highscore));
 
 
         TextView hintTextView = findViewById(R.id.wordHint);
@@ -185,7 +193,9 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
             //System.out.println("LINE: " + String.valueOf(ballsBox.getText()).substring(12));
 
             if ( roundPool.checkGuess(String.valueOf(ballsBox.getText()).substring(12))) {
+                wordCount[0]++;
                 correctCount[0]++;
+                score += time;
                 Toast.makeText(getApplicationContext(), "Correct :)", Toast.LENGTH_SHORT).show();
                 timer.cancel();
                 timer = new Timer();
@@ -193,6 +203,8 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
                 timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
                 TextView wordsLeftView = findViewById(R.id.wordsLeft);
                 wordsLeftView.setText(String.format("Similar words: %d", roundPool.wordsLeft()));
+                updateHighScore();
+
                 if ( correctCount[0] == 1 ){
                     pathAnimator1[0].setDuration(1000);
                     pathAnimator1[0].start();
@@ -204,10 +216,19 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
                 if ( correctCount[0] == 3 ){
                     pathAnimator3[0].setDuration(1000);
                     pathAnimator3[0].start();
-                    timer.cancel();
                     updateHighScore();
-                }
+                    timer.cancel();
 
+                    LinearLayout gameContainer = findViewById(R.id.gameContainer);
+                    gameContainer.removeAllViews();
+
+                    TextView gameOverView = new TextView(this);
+                    gameOverView.setTypeface(ResourcesCompat.getFont(this, R.font.visbyroundcf_demibold));
+                    gameOverView.setText("Game Over!");
+
+                    gameOverView.setTextSize(20);
+                    gameContainer.addView(gameOverView);
+                }
             }
             else
                 Toast.makeText(getApplicationContext(),"Incorrect :(",Toast.LENGTH_SHORT).show();
@@ -218,13 +239,14 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
        timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
     }
 
+    @SuppressLint("SetTextI18n")
     public void updateHighScore() {
-        if (correctCount[0] > highscore) {
-            highscore = correctCount[0];
-            editor.putInt(mode.getHighScoreTag(),correctCount[0]);
+        if (score > highscore) {
+            highscore = score;
+            editor.putInt(mode.getHighScoreTag(),wordCount[0]);
             runOnUiThread(() -> {
                 TextView highScoreValView = findViewById(R.id.highScoreValue);
-                highScoreValView.setText(correctCount[0]);
+                highScoreValView.setText(Integer.toString(score));
             });
         }
     }
