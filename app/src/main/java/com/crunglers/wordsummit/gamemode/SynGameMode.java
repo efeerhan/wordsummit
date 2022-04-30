@@ -38,4 +38,9 @@ public class SynGameMode extends GameMode {
     public String getModeTip() {
         return "Type in synonyms for \"%s\"";
     }
+
+    @Override
+    public String getHighScoreTag() {
+        return "syn_high_score";
+    }
 }

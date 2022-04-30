@@ -52,8 +52,9 @@ public abstract class GameMode {
 
 
     public abstract void modifyPool(ResultPool pool);
+    public abstract String getModeTip();
+    public abstract String getHighScoreTag();
     protected abstract String getQueryPrefix();
     protected abstract String getExtraQueryFlags();
     protected abstract InputStream getFileStream();
-    public abstract String getModeTip();
 }

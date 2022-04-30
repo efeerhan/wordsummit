@@ -1,5 +1,6 @@
 package com.crunglers.wordsummit;
 
+import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,6 +31,10 @@ import java.util.TimerTask;
 
 public class GameActivity extends AppCompatActivity implements QueryDelegate {
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+    private int score = 0;
+    private int highscore = 0;
     private ResultPool roundPool = null;
     private Timer timer = new Timer();
     private int time = 20;
@@ -62,6 +67,8 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefs = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        editor = prefs.edit();
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         super.onCreate(savedInstanceState);
@@ -76,6 +83,8 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         else {
             mode = new HomoGameMode(this, queue, this);
         }
+        //TODO lookie here matie
+        highscore = prefs.getInt(mode.getHighScoreTag(),0);
 
         TextView hintTextView = findViewById(R.id.wordHint);
         hintTextView.setText(String.format(mode.getModeTip(), mode.getRoundWord()));
@@ -202,6 +211,15 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
 
        timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
     }
+
+    public void updateHighScore() {
+        if (score > highscore) {
+            highscore = score;
+            //TODO UPDATE HIGH SCORE LABEL
+            editor.putInt(mode.getHighScoreTag(),score);
+        }
+    }
+
 
     @SuppressLint("DefaultLocale")
     @Override

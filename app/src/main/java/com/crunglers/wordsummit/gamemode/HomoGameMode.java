@@ -39,5 +39,10 @@ public class HomoGameMode extends GameMode {
         return "Find words that sound the same as \"%s\", but are spelled differently";
     }
 
+    @Override
+    public String getHighScoreTag() {
+        return "homo_high_score";
+    }
+
 
 }
