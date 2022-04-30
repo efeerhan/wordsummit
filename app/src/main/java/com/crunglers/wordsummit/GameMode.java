@@ -52,4 +52,5 @@ public abstract class GameMode {
 
     protected abstract String getQueryPrefix();
     protected abstract InputStream getFileStream();
+    protected abstract String getModeTip();
 }

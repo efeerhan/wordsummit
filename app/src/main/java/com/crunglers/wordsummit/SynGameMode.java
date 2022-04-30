@@ -21,5 +21,8 @@ public class SynGameMode extends GameMode {
         return context.getResources().openRawResource(R.raw.synonym_sources);
     }
 
-
+    @Override
+    protected String getModeTip() {
+        return "Type in synonyms for %s";
+    }
 }

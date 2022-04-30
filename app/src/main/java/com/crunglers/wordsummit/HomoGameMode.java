@@ -21,4 +21,11 @@ public class HomoGameMode extends GameMode {
     protected InputStream getFileStream() {
         return context.getResources().openRawResource(R.raw.homophone_sources);
     }
+
+    @Override
+    protected String getModeTip() {
+        return "Type in words that sound the same as %s, but are spelled differently from it";
+    }
+
+
 }
