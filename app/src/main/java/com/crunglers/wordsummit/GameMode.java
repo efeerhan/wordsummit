@@ -6,12 +6,14 @@ import com.android.volley.RequestQueue;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class GameMode {
+    private static final String BASE_URL = "https://api.datamuse.com/words?";
+    private static final int MAX_RESULTS = 10;
+
     private final List<String> baseWords = new ArrayList<>();
     protected Context context;
     private final RequestQueue queue;
@@ -24,8 +26,6 @@ public abstract class GameMode {
         baseWords.addAll(retrieveBaseWords());
     }
 
-    private static final String BASE_URL = "https://api.datamuse.com/words?";
-    private static final int MAX_RESULTS = 10;
 
 
 
@@ -34,7 +34,7 @@ public abstract class GameMode {
      * @return returns the baseword
      */
     public final String getRoundWord() {
-        String word = baseWords.remove((int) Math.random() * baseWords.size());
+        String word = baseWords.remove((int) (Math.random() * baseWords.size()));
         queue.add(sender.performQuery(BASE_URL + getQueryPrefix() + word + "&max=" + MAX_RESULTS + "&md=f"));
         return word;
     }

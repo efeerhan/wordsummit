@@ -103,7 +103,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     }
 
     @Override
-    public void didReceiveQuery(List<WordResult> QueryWords) {
+    public void didReceiveQuery(ResultPool QueryWords) {
 
     }
 }

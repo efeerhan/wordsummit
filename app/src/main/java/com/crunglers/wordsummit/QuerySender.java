@@ -27,7 +27,7 @@ public class QuerySender {
                     @Override
                     public void onResponse(String response) {
                         List<WordResult> queryWords = parseJSONString(response);
-                        delegate.didReceiveQuery(queryWords);
+                        delegate.didReceiveQuery(new ResultPool(queryWords));
                     }
                 },
 
