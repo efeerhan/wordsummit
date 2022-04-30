@@ -261,6 +261,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         if (score > highscore) {
             highscore = score;
             editor.putInt(mode.getHighScoreTag(),wordCount[0]);
+            editor.apply();
             runOnUiThread(() -> {
                 TextView highScoreValView = findViewById(R.id.highScoreValue);
                 highScoreValView.setText(Integer.toString(score));
