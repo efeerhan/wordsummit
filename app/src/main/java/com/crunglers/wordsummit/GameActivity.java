@@ -10,9 +10,10 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.Locale;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements QueryDelegate {
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -72,5 +73,10 @@ public class GameActivity extends AppCompatActivity {
         enter.setOnClickListener( v -> {
 
         });
+    }
+
+    @Override
+    public void didReceiveQuery(List<WordResult> QueryWords) {
+
     }
 }

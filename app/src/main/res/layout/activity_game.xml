@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_bg_plain"
+    android:background="@drawable/selectscreen_bg"
     tools:context=".GameActivity">
 
     <LinearLayout
@@ -45,8 +45,6 @@
 
         </LinearLayout>
 
-
-
         <LinearLayout
             android:layout_marginHorizontal="10dp"
             android:id="@+id/keyboardContainer"
@@ -61,70 +59,70 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbQ"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="Q"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbW"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="W"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbE"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="E"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbR"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="R"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbT"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="T"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbY"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="Y"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbU"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="U"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbI"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="I"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbO"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="O"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/kbP"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
@@ -140,55 +138,55 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="A"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="S"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="D"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="F"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="G"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="H"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="J"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="K"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
@@ -204,55 +202,55 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1.5"
                     android:text="Go"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="Z"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="X"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="C"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="V"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="B"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="N"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="M"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1.5"

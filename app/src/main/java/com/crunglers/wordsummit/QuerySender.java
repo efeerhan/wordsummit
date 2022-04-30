@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuerySender {
-    private QueryDelegate delegate;
+    private final QueryDelegate delegate;
 
     public QuerySender(QueryDelegate delegate) {
         this.delegate = delegate;
