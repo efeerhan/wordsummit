@@ -50,13 +50,6 @@ public abstract class GameMode {
         return null;
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     public abstract void modifyPool(ResultPool pool);
     public abstract String getModeTip();
     public abstract String getHighScoreTag();

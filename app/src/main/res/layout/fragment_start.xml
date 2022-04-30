@@ -24,7 +24,7 @@
             android:layout_height="70dp"
             android:layout_marginBottom="200dp"
             android:background="@drawable/start_button"
-            android:fontFamily="@font/caveat_bold"
+            android:fontFamily="@font/visbyroundcf_bold"
             android:text="Start"
             android:textAllCaps="false"
             android:textColor="@color/white"

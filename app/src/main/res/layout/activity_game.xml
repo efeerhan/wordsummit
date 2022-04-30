@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Time: 10"
+            android:text="Time: 20"
             android:textSize="40sp"
             android:fontFamily="@font/visbyroundcf_bold"
             android:layout_marginBottom="5dp"/>
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Words left: 1"
+            android:text="Similar words: 1"
             android:textSize="20sp"
             android:fontFamily="@font/visbyroundcf_bold"
             android:layout_marginBottom="15dp"/>
