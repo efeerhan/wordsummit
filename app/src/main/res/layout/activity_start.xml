@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/selectscreen_bg"
+    android:background="@drawable/select_screen_bg"
     tools:context=".StartActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -23,7 +23,9 @@
             android:id="@+id/mount"
             android:layout_width="wrap_content"
             android:layout_height="260dp"
-            android:src="@drawable/mount_art" />
+            android:src="@drawable/mount_art"
+            android:contentDescription="Balls"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 

@@ -4,13 +4,15 @@
     android:id="@+id/gameActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/selectscreen_bg"
-    tools:context=".GameActivity">
+    android:background="@drawable/select_screen_bg"
+    tools:context=".GameActivity"
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        tools:ignore="ButtonStyle"
         android:orientation="vertical">
 
         <ImageView
