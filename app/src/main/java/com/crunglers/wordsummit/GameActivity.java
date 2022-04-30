@@ -2,11 +2,17 @@ package com.crunglers.wordsummit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.graphics.Path;
 import android.os.Bundle;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +34,23 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         LinearLayout row3 = findViewById(R.id.keyboardRow3);
 
         TextView ballsBox = findViewById(R.id.inputView);
+
+        ImageView mountain = findViewById(R.id.gameMount);
+
+        ConstraintLayout layout = findViewById(R.id.gameActivityLayout);
+
+        final PlayerImg[] player = new PlayerImg[1];
+        final Path[] path = new Path[1];
+        final ValueAnimator[] pathAnimator = new ValueAnimator[1];
+
+        mountain.post(() -> {
+            player[0] = new PlayerImg(GameActivity.this, mountain);
+            layout.addView(player[0]);
+            path[0] = new Path();
+            path[0].moveTo(player[0].getX(), player[0].getY());
+            path[0].lineTo((float) (mountain.getX() + mountain.getMeasuredWidth()/2.0), mountain.getY());
+            pathAnimator[0] = ObjectAnimator.ofFloat(player[0], "x", "y", path[0]);
+        });
 
         for ( int i = 0; i < 10; i++ ) {
             AppCompatButton key = (AppCompatButton)row1.getChildAt(i);
@@ -68,10 +91,14 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
             }
         });
 
-        AppCompatButton enter = (AppCompatButton)row3.getChildAt(0);
+        AppCompatButton go = (AppCompatButton)row3.getChildAt(0);
 
-        enter.setOnClickListener( v -> {
-
+        go.setOnClickListener( v -> {
+            ballsBox.setText("Your guess: ");
+            pathAnimator[0].setDuration(1000);
+            pathAnimator[0].start();
+            player[0].setX((float) (mountain.getX() + mountain.getMeasuredWidth()/2.0));
+            player[0].setY(mountain.getY());
         });
     }
 
