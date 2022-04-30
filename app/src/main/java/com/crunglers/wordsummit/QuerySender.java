@@ -14,21 +14,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuerySender {
+    private QueryDelegate delegate;
 
-    public static StringRequest performQuery(String url) {
-        return new StringRequest(Request.Method.GET, url,
-
-                response -> {
-                    Log.i("",response);
-                    List<WordResult> queryWords = parseJSONString(response);
-                    Log.i("","–––––" + queryWords.size() );
-                    queryWords.forEach(System.out::println);
-                },
-
-                error -> Log.e("",error.toString()));
+    public QuerySender(QueryDelegate delegate) {
+        this.delegate = delegate;
     }
 
-    private static List<WordResult> parseJSONString(String string) {
+    public  StringRequest performQuery(String url) {
+        return new StringRequest(Request.Method.GET, url,
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        List<WordResult> queryWords = parseJSONString(response);
+                        delegate.didReceiveQuery(queryWords);
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("",error.toString());
+                    }
+                });
+    }
+
+    private  List<WordResult> parseJSONString(String string) {
         Gson gson = new Gson();
         Collection<WordResult> words;
         try {

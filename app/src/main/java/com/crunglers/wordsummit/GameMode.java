@@ -1,8 +1,6 @@
-package com.example.myapplication;
+package com.crunglers.wordsummit;
 
 import com.android.volley.RequestQueue;
-
-import java.util.List;
 
 public abstract class GameMode {
     private final RequestQueue queue;

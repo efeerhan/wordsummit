@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.crunglers.wordsummit;
 
 import java.util.List;
 
