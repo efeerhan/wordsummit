@@ -9,9 +9,6 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.Path;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -22,14 +19,9 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.xml.transform.Result;
 
 public class GameActivity extends AppCompatActivity implements QueryDelegate {
 
@@ -61,7 +53,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
@@ -145,10 +137,10 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         AppCompatButton go = (AppCompatButton)row3.getChildAt(0);
 
         go.setOnClickListener( v -> {
-            /*pathAnimator[0].setDuration(1000);
+            pathAnimator[0].setDuration(1000);
             pathAnimator[0].start();
             player[0].setX((float) (mountain.getX() + mountain.getMeasuredWidth()/2.0));
-            player[0].setY(mountain.getY());*/
+            player[0].setY(mountain.getY());
 
             System.out.println("LINE: " + String.valueOf(ballsBox.getText()).substring(12));
 

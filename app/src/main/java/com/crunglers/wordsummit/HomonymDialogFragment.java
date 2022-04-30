@@ -15,14 +15,16 @@ import androidx.fragment.app.DialogFragment;
 
 public class HomonymDialogFragment extends DialogFragment {
 
-    AlertDialog AD;
+    private AlertDialog AD;
+    String instructions = "Find words that sound like the given word within the time limit to earn points " +
+            "and progress your character up the mountain!";
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AD = new AlertDialog.Builder(requireContext())
-                .setMessage("balls")
-                .setPositiveButton("Next", (dialog, which) -> {
+                .setMessage(instructions)
+                .setPositiveButton("Play", (dialog, which) -> {
                     Intent i = new Intent(getContext(), GameActivity.class);
                     i.putExtra("mode", "hom");
                     requireContext().startActivity(i);
