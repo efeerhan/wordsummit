@@ -72,8 +72,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
                     time = 20;
                 }
                 if ( wordCount[0] == 3 ) {
-                    updateHighScore();
-                    timer.cancel();
+                    gameOver();
                 }
                 timerView.setText(String.format("Time: %d", time));
             });
@@ -222,30 +221,9 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
                 if ( correctCount[0] == 3 ){
                     pathAnimator3[0].setDuration(1000);
                     pathAnimator3[0].start();
-                    updateHighScore();
-                    timer.cancel();
-
-                    LinearLayout gameContainer = findViewById(R.id.gameContainer);
-                    gameContainer.removeAllViews();
-
-                    TextView gameOverView = new TextView(this);
-                    gameOverView.setTypeface(ResourcesCompat.getFont(this, R.font.visbyroundcf_demibold));
-                    gameOverView.setText("Game Over!");
-                    gameOverView.setTextColor(getResources().getColor(R.color.text));
-                    gameOverView.setTextSize(20);
-
-                    AppCompatButton returnButton = new AppCompatButton(this);
-                    returnButton.setText("Return to select");
-                    returnButton.setAllCaps(false);
-                    returnButton.setTypeface(ResourcesCompat.getFont(this, R.font.visbyroundcf_demibold));
-                    returnButton.setTextColor(getResources().getColor(R.color.text));
-                    returnButton.setOnClickListener( d -> {
-                        Intent i = new Intent(this, StartActivity.class);
-                        this.startActivity(i);
-                    });
-                    gameContainer.addView(gameOverView);
-                    gameContainer.addView(returnButton);
+                    gameOver();
                 }
+
             }
             else
                 Toast.makeText(getApplicationContext(),"Incorrect :(",Toast.LENGTH_SHORT).show();
@@ -256,11 +234,37 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
        timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
     }
 
+    private void gameOver() {
+        updateHighScore();
+        timer.cancel();
+
+        LinearLayout gameContainer = findViewById(R.id.gameContainer);
+        gameContainer.removeAllViews();
+
+        TextView gameOverView = new TextView(this);
+        gameOverView.setTypeface(ResourcesCompat.getFont(this, R.font.visbyroundcf_demibold));
+        gameOverView.setText("Game Over!");
+        gameOverView.setTextColor(getResources().getColor(R.color.text));
+        gameOverView.setTextSize(20);
+
+        AppCompatButton returnButton = new AppCompatButton(this);
+        returnButton.setText("Return to select");
+        returnButton.setAllCaps(false);
+        returnButton.setTypeface(ResourcesCompat.getFont(this, R.font.visbyroundcf_demibold));
+        returnButton.setTextColor(getResources().getColor(R.color.text));
+        returnButton.setOnClickListener( d -> {
+            Intent i = new Intent(this, StartActivity.class);
+            this.startActivity(i);
+        });
+        gameContainer.addView(gameOverView);
+        gameContainer.addView(returnButton);
+    }
+
     @SuppressLint("SetTextI18n")
     public void updateHighScore() {
         if (score > highscore) {
             highscore = score;
-            editor.putInt(mode.getHighScoreTag(),wordCount[0]);
+            editor.putInt(mode.getHighScoreTag(),score);
             editor.apply();
             runOnUiThread(() -> {
                 TextView highScoreValView = findViewById(R.id.highScoreValue);
