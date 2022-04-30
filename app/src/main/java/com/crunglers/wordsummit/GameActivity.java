@@ -1,5 +1,6 @@
 package com.crunglers.wordsummit;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -56,7 +57,12 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
             runOnUiThread(() -> {
                 if ( time == 20 ) {
                     TextView hintTextView = findViewById(R.id.wordHint);
-                    hintTextView.setText(String.format(mode.getModeTip(), mode.getRoundWord()));
+                    try {
+                        hintTextView.setText(String.format(mode.getModeTip(), mode.getRoundWord()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 if ( time > 0 ) {
                     time--;
@@ -225,9 +231,20 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
                     TextView gameOverView = new TextView(this);
                     gameOverView.setTypeface(ResourcesCompat.getFont(this, R.font.visbyroundcf_demibold));
                     gameOverView.setText("Game Over!");
-
+                    gameOverView.setTextColor(getResources().getColor(R.color.text));
                     gameOverView.setTextSize(20);
+
+                    AppCompatButton returnButton = new AppCompatButton(this);
+                    returnButton.setText("Return to select");
+                    returnButton.setAllCaps(false);
+                    returnButton.setTypeface(ResourcesCompat.getFont(this, R.font.visbyroundcf_demibold));
+                    returnButton.setTextColor(getResources().getColor(R.color.text));
+                    returnButton.setOnClickListener( d -> {
+                        Intent i = new Intent(this, StartActivity.class);
+                        this.startActivity(i);
+                    });
                     gameContainer.addView(gameOverView);
+                    gameContainer.addView(returnButton);
                 }
             }
             else
