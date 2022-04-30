@@ -1,11 +1,15 @@
 package com.crunglers.wordsummit;
 
+import android.content.Context;
+import android.util.Log;
 import com.android.volley.RequestQueue;
+
+import java.io.InputStream;
 
 public class HomoGameMode extends GameMode {
 
-    public HomoGameMode(RequestQueue queue, QueryDelegate delegate) {
-        super(queue, delegate);
+    public HomoGameMode(Context context, RequestQueue queue, QueryDelegate delegate) {
+        super(context, queue, delegate);
     }
 
     @Override
@@ -13,5 +17,8 @@ public class HomoGameMode extends GameMode {
         return "rel_hom=";
     }
 
-
+    @Override
+    protected InputStream getFileStream() {
+        return context.getResources().openRawResource(R.raw.homophone_sources);
+    }
 }
