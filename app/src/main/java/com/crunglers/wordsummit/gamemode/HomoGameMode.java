@@ -15,7 +15,7 @@ public class HomoGameMode extends GameMode {
     }
 
     @Override
-    protected void modifyPool(ResultPool pool) {
+    public void modifyPool(ResultPool pool) {
         return;
     }
 
@@ -35,7 +35,7 @@ public class HomoGameMode extends GameMode {
     }
 
     @Override
-    protected String getModeTip() {
+    public String getModeTip() {
         return "Find words that sound the same as \"%s\", but are spelled differently";
     }
 

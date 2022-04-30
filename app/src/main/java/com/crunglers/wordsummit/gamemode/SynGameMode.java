@@ -15,7 +15,7 @@ public class SynGameMode extends GameMode {
     }
 
     @Override
-    protected void modifyPool(ResultPool pool) {
+    public void modifyPool(ResultPool pool) {
         pool.filterDiffTypes();
     }
 
@@ -35,7 +35,7 @@ public class SynGameMode extends GameMode {
     }
 
     @Override
-    protected String getModeTip() {
+    public String getModeTip() {
         return "Type in synonyms for \"%s\"";
     }
 }

@@ -35,6 +35,7 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     private int time = 20;
     private GameMode mode;
     private final int TIMER_PERIOD = 1000;
+    TextView wordsLeftView;
 
     private class timeLoop extends TimerTask {
 
@@ -42,16 +43,16 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         @Override
         public void run() {
             TextView timerView = findViewById(R.id.timer);
-            TextView wordsLeftView = findViewById(R.id.wordsLeft);
             runOnUiThread(() -> {
-                if ( time > 0 ){
-                    time--;
-                }
-                else {
-                    time = 20;
+                if ( time == 20 ) {
                     TextView hintTextView = findViewById(R.id.wordHint);
                     hintTextView.setText(String.format(mode.getModeTip(), mode.getRoundWord()));
-                    wordsLeftView.setText(String.format("Words left: %d", roundPool.wordsLeft()));
+                }
+                if ( time > 0 ) {
+                    time--;
+                }
+                if ( time == 0 ) {
+                    time = 20;
                 }
                 timerView.setText(String.format("Time: %d", time));
             });
@@ -66,6 +67,8 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         RequestQueue queue = Volley.newRequestQueue(this);
+
+        wordsLeftView = findViewById(R.id.wordsLeft);
 
         if (getIntent().getExtras().getString("mode").equals("syn")) {
             mode = new SynGameMode(this, queue, this);
@@ -88,16 +91,40 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         ConstraintLayout layout = findViewById(R.id.gameActivityLayout);
 
         final PlayerImg[] player = new PlayerImg[1];
-        final Path[] path = new Path[1];
-        final ValueAnimator[] pathAnimator = new ValueAnimator[1];
+        final Path[] path1 = new Path[1];
+        final Path[] path2 = new Path[1];
+        final Path[] path3 = new Path[1];
+        final ValueAnimator[] pathAnimator1 = new ValueAnimator[1];
+        final ValueAnimator[] pathAnimator2 = new ValueAnimator[1];
+        final ValueAnimator[] pathAnimator3 = new ValueAnimator[1];
+        int[] correctCount = new int[1];
 
         mountain.post(() -> {
+
+            float mX = mountain.getX();
+            float mY = mountain.getY();
+            float mWidth = mountain.getMeasuredWidth();
+            float mHeight = mountain.getMeasuredHeight();
+
             player[0] = new PlayerImg(GameActivity.this, mountain);
             layout.addView(player[0]);
-            path[0] = new Path();
-            path[0].moveTo(player[0].getX(), player[0].getY());
-            path[0].lineTo((float) (mountain.getX() + mountain.getMeasuredWidth()/2.0), mountain.getY());
-            pathAnimator[0] = ObjectAnimator.ofFloat(player[0], "x", "y", path[0]);
+
+            path1[0] = new Path();
+            path2[0] = new Path();
+            path3[0] = new Path();
+
+            path1[0].moveTo(player[0].getX(), player[0].getY());
+            path1[0].lineTo((float)(mX + mWidth*0.85), (float)(mY + mHeight*0.66));
+
+            path2[0].moveTo((float)(mX + mWidth*0.85), (float)(mY + mHeight*0.66));
+            path2[0].lineTo((float)(mX + mWidth*0.35), (float)(mY + mHeight*0.33));
+
+            path3[0].moveTo((float)(mX + mWidth*0.35), (float)(mY + mHeight*0.33));
+            path3[0].lineTo((float)(mX + mWidth*0.5), (float)(mY));
+
+            pathAnimator1[0] = ObjectAnimator.ofFloat(player[0], "x", "y", path1[0]);
+            pathAnimator2[0] = ObjectAnimator.ofFloat(player[0], "x", "y", path2[0]);
+            pathAnimator3[0] = ObjectAnimator.ofFloat(player[0], "x", "y", path3[0]);
         });
 
         for ( int i = 0; i < 10; i++ ) {
@@ -142,21 +169,30 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         AppCompatButton go = (AppCompatButton)row3.getChildAt(0);
 
         go.setOnClickListener( v -> {
-            pathAnimator[0].setDuration(1000);
-            pathAnimator[0].start();
-            player[0].setX((float) (mountain.getX() + mountain.getMeasuredWidth()/2.0));
-            player[0].setY(mountain.getY());
-
-            System.out.println("LINE: " + String.valueOf(ballsBox.getText()).substring(12));
+            //System.out.println("LINE: " + String.valueOf(ballsBox.getText()).substring(12));
 
             if ( roundPool.checkGuess(String.valueOf(ballsBox.getText()).substring(12))) {
+                correctCount[0]++;
                 Toast.makeText(getApplicationContext(), "Correct :)", Toast.LENGTH_SHORT).show();
                 timer.cancel();
                 timer = new Timer();
                 time = 20;
                 timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
                 TextView wordsLeftView = findViewById(R.id.wordsLeft);
-                wordsLeftView.setText(String.format("Words left: %d", roundPool.wordsLeft()));
+                wordsLeftView.setText(String.format("Similar words: %d", roundPool.wordsLeft()));
+                if ( correctCount[0] == 1 ){
+                    pathAnimator1[0].setDuration(1000);
+                    pathAnimator1[0].start();
+                }
+                if ( correctCount[0] == 2 ){
+                    pathAnimator2[0].setDuration(1000);
+                    pathAnimator2[0].start();
+                }
+                if ( correctCount[0] == 3 ){
+                    pathAnimator3[0].setDuration(1000);
+                    pathAnimator3[0].start();
+                }
+
             }
             else
                 Toast.makeText(getApplicationContext(),"Incorrect :(",Toast.LENGTH_SHORT).show();
@@ -167,9 +203,12 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
        timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void didReceiveQuery(ResultPool QueryWords) {
+        System.out.println("WORD GOT");
         roundPool = QueryWords;
         mode.modifyPool(roundPool);
+        wordsLeftView.setText(String.format("Similar word: %d", roundPool.wordsLeft()));
     }
 }
