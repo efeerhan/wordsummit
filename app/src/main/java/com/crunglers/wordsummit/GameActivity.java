@@ -25,6 +25,8 @@ import com.crunglers.wordsummit.gamemode.SynGameMode;
 import com.crunglers.wordsummit.query.QueryDelegate;
 import com.crunglers.wordsummit.query.ResultPool;
 
+import org.w3c.dom.Text;
+
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,14 +35,14 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-    private int score = 0;
     private int highscore = 0;
     private ResultPool roundPool = null;
     private Timer timer = new Timer();
     private int time = 20;
     private GameMode mode;
     private final int TIMER_PERIOD = 1000;
-    TextView wordsLeftView;
+    private TextView wordsLeftView;
+    private int[] correctCount = new int[1];
 
     private class timeLoop extends TimerTask {
 
@@ -83,8 +85,11 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         else {
             mode = new HomoGameMode(this, queue, this);
         }
-        //TODO lookie here matie
+
+        TextView highScoreValView = findViewById(R.id.highScoreValue);
         highscore = prefs.getInt(mode.getHighScoreTag(),0);
+        highScoreValView.setText(highscore);
+
 
         TextView hintTextView = findViewById(R.id.wordHint);
         hintTextView.setText(String.format(mode.getModeTip(), mode.getRoundWord()));
@@ -106,7 +111,6 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         final ValueAnimator[] pathAnimator1 = new ValueAnimator[1];
         final ValueAnimator[] pathAnimator2 = new ValueAnimator[1];
         final ValueAnimator[] pathAnimator3 = new ValueAnimator[1];
-        int[] correctCount = new int[1];
 
         mountain.post(() -> {
 
@@ -200,6 +204,8 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
                 if ( correctCount[0] == 3 ){
                     pathAnimator3[0].setDuration(1000);
                     pathAnimator3[0].start();
+                    timer.cancel();
+                    updateHighScore();
                 }
 
             }
@@ -213,14 +219,15 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     }
 
     public void updateHighScore() {
-        if (score > highscore) {
-            highscore = score;
-            //TODO UPDATE HIGH SCORE LABEL
-            editor.putInt(mode.getHighScoreTag(),score);
+        if (correctCount[0] > highscore) {
+            highscore = correctCount[0];
+            editor.putInt(mode.getHighScoreTag(),correctCount[0]);
+            runOnUiThread(() -> {
+                TextView highScoreValView = findViewById(R.id.highScoreValue);
+                highScoreValView.setText(correctCount[0]);
+            });
         }
     }
-
-
 
     @SuppressLint("DefaultLocale")
     @Override
