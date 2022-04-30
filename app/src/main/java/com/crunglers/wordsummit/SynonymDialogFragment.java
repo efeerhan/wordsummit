@@ -16,7 +16,7 @@ public class SynonymDialogFragment extends DialogFragment {
         return new AlertDialog.Builder(requireContext())
                 .setMessage("balls")
                 .setPositiveButton("Next", (dialog, which) -> {
-                    Intent i = new Intent(getContext(), SynonymGameActivity.class);
+                    Intent i = new Intent(getContext(), GameActivity.class);
                     requireContext().startActivity(i);} )
                 .create();
     }

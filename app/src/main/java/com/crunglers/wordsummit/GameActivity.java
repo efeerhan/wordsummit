@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-public class SynonymGameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -20,7 +20,7 @@ public class SynonymGameActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_synonym_game);
+        setContentView(R.layout.activity_game);
 
         LinearLayout row1 = findViewById(R.id.keyboardRow1);
         LinearLayout row2 = findViewById(R.id.keyboardRow2);
