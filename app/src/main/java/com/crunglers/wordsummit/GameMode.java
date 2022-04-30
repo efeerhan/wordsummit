@@ -1,7 +1,6 @@
 package com.crunglers.wordsummit;
 
 import android.content.Context;
-import android.util.Log;
 import com.android.volley.RequestQueue;
 
 import java.io.*;
@@ -25,9 +24,6 @@ public abstract class GameMode {
         sender = new QuerySender(delegate);
         baseWords.addAll(retrieveBaseWords());
     }
-
-
-
 
     /**
      * Starts query process using random base word

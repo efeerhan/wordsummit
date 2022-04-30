@@ -15,6 +15,28 @@
         tools:ignore="ButtonStyle"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/timer"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Time: 10"
+            android:textSize="40sp"
+            android:fontFamily="@font/visbyroundcf_bold"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/wordsLeft"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Words left: 1"
+            android:textSize="20sp"
+            android:fontFamily="@font/visbyroundcf_bold"
+            android:layout_marginBottom="15dp"/>
+
         <ImageView
             android:id="@+id/gameMount"
             android:layout_width="match_parent"
@@ -34,10 +56,13 @@
                 android:id="@+id/wordHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:textAlignment="center"
                 android:fontFamily="@font/visbyroundcf_bold"
                 android:textColor="@color/text"
-                android:text="You're guessing an ambiguous synonym for: precarious"/>
+                android:textSize="20sp"
+                android:text="balls in my mouth"/>
 
             <TextView
                 android:id="@+id/inputView"
@@ -46,6 +71,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/visbyround"
                 android:textColor="@color/text"
+                android:textSize="20sp"
                 android:text="Your guess: "/>
 
         </LinearLayout>

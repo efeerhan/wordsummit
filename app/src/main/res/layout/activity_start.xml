@@ -13,23 +13,19 @@
         android:layout_height="match_parent"
         android:name="com.crunglers.wordsummit.StartFragment" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/mount"
-            android:layout_width="wrap_content"
-            android:layout_height="260dp"
-            android:src="@drawable/mount_art"
-            android:contentDescription="Balls"
-            tools:ignore="HardcodedText" />
-
-    </LinearLayout>
-
-
+    <ImageView
+        android:id="@+id/mount"
+        android:layout_width="wrap_content"
+        android:layout_height="260dp"
+        android:contentDescription="Balls"
+        android:src="@drawable/mount_art"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_container"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="HardcodedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

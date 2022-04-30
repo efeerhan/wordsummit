@@ -9,24 +9,37 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.Objects;
+
 public class SynonymDialogFragment extends DialogFragment {
+
+    AlertDialog AD;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog AD = new AlertDialog.Builder(requireContext())
+        AD = new AlertDialog.Builder(requireContext())
                 .setMessage("balls")
                 .setPositiveButton("Next", (dialog, which) -> {
                     Intent i = new Intent(getContext(), GameActivity.class);
-                    requireContext().startActivity(i);} )
+                    i.putExtra("mode", "syn");
+                    requireContext().startActivity(i);
+                })
                 .setNegativeButton("Go back", (dialog, which) -> {
                     dismiss();
                 })
                 .create();
 
-        /*TextView textView = (TextView)AD.findViewById(android.R.id.message);
-        textView.setTypeface(Typeface.createFromAsset(getContext().getAssets(),"font/visbyround.otf"));*/
         return AD;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        TextView textView = (TextView) AD.getWindow().findViewById(android.R.id.message);
+        textView.setTypeface(ResourcesCompat.getFont(requireActivity(), R.font.visbyroundcf_regular));
     }
 }

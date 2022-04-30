@@ -15,9 +15,11 @@ public class ResultPool {
 
     public boolean checkGuess(String guess) {
         String trimmedGuess = guess.trim();
-        if (results.contains(trimmedGuess)) {
-            results.remove(trimmedGuess);
-            return true;
+        for ( WordResult result : results ) {
+            if (result.word.equals(trimmedGuess)) {
+                results.remove(result);
+                return true;
+            }
         }
         return false;
     }

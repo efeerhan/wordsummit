@@ -9,17 +9,57 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.xml.transform.Result;
 
 public class GameActivity extends AppCompatActivity implements QueryDelegate {
+
+    private ResultPool roundPool = null;
+    private Timer timer = new Timer();
+    private int time = 20;
+    private GameMode mode;
+    private final int TIMER_PERIOD = 1000;
+
+    private class timeLoop extends TimerTask {
+
+        @SuppressLint("DefaultLocale")
+        @Override
+        public void run() {
+            TextView timerView = findViewById(R.id.timer);
+            TextView wordsLeftView = findViewById(R.id.wordsLeft);
+            runOnUiThread(() -> {
+                if ( time > 0 ){
+                    time--;
+                }
+                else {
+                    time = 20;
+                    TextView hintTextView = findViewById(R.id.wordHint);
+                    hintTextView.setText(String.format(mode.getModeTip(), mode.getRoundWord()));
+                    wordsLeftView.setText(String.format("Words left: %d", roundPool.wordsLeft()));
+                }
+                timerView.setText(String.format("Time: %d", time));
+            });
+        }
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -28,6 +68,17 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        if (getIntent().getExtras().getString("mode").equals("syn")) {
+            mode = new SynGameMode(this, queue, this);
+        }
+        else {
+            mode = new HomoGameMode(this, queue, this);
+        }
+
+        TextView hintTextView = findViewById(R.id.wordHint);
+        hintTextView.setText(String.format(mode.getModeTip(), mode.getRoundWord()));
 
         LinearLayout row1 = findViewById(R.id.keyboardRow1);
         LinearLayout row2 = findViewById(R.id.keyboardRow2);
@@ -94,16 +145,33 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
         AppCompatButton go = (AppCompatButton)row3.getChildAt(0);
 
         go.setOnClickListener( v -> {
-            ballsBox.setText("Your guess: ");
-            pathAnimator[0].setDuration(1000);
+            /*pathAnimator[0].setDuration(1000);
             pathAnimator[0].start();
             player[0].setX((float) (mountain.getX() + mountain.getMeasuredWidth()/2.0));
-            player[0].setY(mountain.getY());
+            player[0].setY(mountain.getY());*/
+
+            System.out.println("LINE: " + String.valueOf(ballsBox.getText()).substring(12));
+
+            if ( roundPool.checkGuess(String.valueOf(ballsBox.getText()).substring(12))) {
+                Toast.makeText(getApplicationContext(), "Correct :)", Toast.LENGTH_SHORT).show();
+                timer.cancel();
+                timer = new Timer();
+                time = 20;
+                timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
+                TextView wordsLeftView = findViewById(R.id.wordsLeft);
+                wordsLeftView.setText(String.format("Words left: %d", roundPool.wordsLeft()));
+            }
+            else
+                Toast.makeText(getApplicationContext(),"Incorrect :(",Toast.LENGTH_SHORT).show();
+
+            ballsBox.setText("Your guess: ");
         });
+
+       timer.schedule(new timeLoop(), 0, TIMER_PERIOD);
     }
 
     @Override
     public void didReceiveQuery(ResultPool QueryWords) {
-
+        roundPool = QueryWords;
     }
 }

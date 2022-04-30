@@ -24,7 +24,7 @@ public class HomoGameMode extends GameMode {
 
     @Override
     protected String getModeTip() {
-        return "Type in words that sound the same as %s, but are spelled differently from it";
+        return "Find words that sound the same as \"%s\", but are spelled differently";
     }
 
 

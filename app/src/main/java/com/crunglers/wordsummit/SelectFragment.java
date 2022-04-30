@@ -32,6 +32,10 @@ public class SelectFragment extends Fragment {
             new SynonymDialogFragment().show(getParentFragmentManager(), "SynonymSelect Dialog");
         });
 
+        view.findViewById(R.id.HomonymSelect).setOnClickListener( v -> {
+            new HomonymDialogFragment().show(getParentFragmentManager(), "HomonymSelect Dialog");
+        });
+
         return view;
     }
 }
