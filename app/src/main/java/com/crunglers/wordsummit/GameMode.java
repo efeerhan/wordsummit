@@ -31,7 +31,8 @@ public abstract class GameMode {
      */
     public final String getRoundWord() {
         String word = baseWords.remove((int) (Math.random() * baseWords.size()));
-        queue.add(sender.performQuery(BASE_URL + getQueryPrefix() + word + "&max=" + MAX_RESULTS + "&md=f"));
+        //System.out.println(BASE_URL + getQueryPrefix() + word + "&qe=" + getQueryPrefix().replace("=","") + "&max=" + MAX_RESULTS + "&md=fp" + getExtraQueryFlags());
+        queue.add(sender.performQuery(BASE_URL + getQueryPrefix() + word + "&qe=" + getQueryPrefix().replace("=","") + "&max=" + MAX_RESULTS + "&md=fp" + getExtraQueryFlags()));
         return word;
     }
 
@@ -46,7 +47,10 @@ public abstract class GameMode {
         return null;
     }
 
+
+    protected abstract void modifyPool(ResultPool pool);
     protected abstract String getQueryPrefix();
+    protected abstract String getExtraQueryFlags();
     protected abstract InputStream getFileStream();
     protected abstract String getModeTip();
 }

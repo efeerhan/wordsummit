@@ -165,5 +165,6 @@ public class GameActivity extends AppCompatActivity implements QueryDelegate {
     @Override
     public void didReceiveQuery(ResultPool QueryWords) {
         roundPool = QueryWords;
+        mode.modifyPool(roundPool);
     }
 }

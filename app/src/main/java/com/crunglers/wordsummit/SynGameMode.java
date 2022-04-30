@@ -12,8 +12,18 @@ public class SynGameMode extends GameMode {
     }
 
     @Override
+    protected void modifyPool(ResultPool pool) {
+        pool.filterDiffTypes();
+    }
+
+    @Override
     protected String getQueryPrefix() {
         return "rel_syn=";
+    }
+
+    @Override
+    protected String getExtraQueryFlags() {
+        return "";
     }
 
     @Override

@@ -13,8 +13,18 @@ public class HomoGameMode extends GameMode {
     }
 
     @Override
+    protected void modifyPool(ResultPool pool) {
+        return;
+    }
+
+    @Override
     protected String getQueryPrefix() {
         return "rel_hom=";
+    }
+
+    @Override
+    protected String getExtraQueryFlags() {
+        return "";
     }
 
     @Override

@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class StartActivity extends AppCompatActivity {
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title

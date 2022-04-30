@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuerySender {
+    private final static int MIN_SCORE_VAL = 400;
     private final QueryDelegate delegate;
 
     public QuerySender(QueryDelegate delegate) {
@@ -49,6 +50,8 @@ public class QuerySender {
             e.printStackTrace();
             return null;
         }
-        return words.stream().collect(Collectors.toList());
+        return words.stream()
+                .filter(w -> w.score > MIN_SCORE_VAL)
+                .collect(Collectors.toList());
     }
 }
