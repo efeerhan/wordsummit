@@ -20,7 +20,6 @@ Launch the `Word_Summit.apk` in your Android Emulator (or ADB sideload it if you
 
 * [Java](https://www.oracle.com/ca-en/java/)
 * [Volley](https://google.github.io/volley/)
-* [Your Mom](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsfw.furaffinity.net%2Fview%2F19105173%2F&psig=AOvVaw3gglIxCMkcrJv1ynb1eWBM&ust=1651444123017000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNiOhfXqvPcCFQAAAAAdAAAAABAD)
 * [DataMuse](https://www.datamuse.com/api/)
 
 <!-- GETTING STARTED -->
@@ -31,7 +30,6 @@ It's really easy.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* [Your mom](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsfw.furaffinity.net%2Fview%2F19105173%2F&psig=AOvVaw3gglIxCMkcrJv1ynb1eWBM&ust=1651444123017000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNiOhfXqvPcCFQAAAAAdAAAAABAD)
   ```sh
   sudo mom-install
   ```
@@ -55,6 +53,5 @@ There's a lot. DataMuse API is kind of bad. A lot of words that should work don'
 ## Acknowledgments
 
 Just a couple of acknowledgements for people without whom we couldn't have made this:
-* [Your mom](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsfw.furaffinity.net%2Fview%2F19105173%2F&psig=AOvVaw3gglIxCMkcrJv1ynb1eWBM&ust=1651444123017000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNiOhfXqvPcCFQAAAAAdAAAAABAD)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
