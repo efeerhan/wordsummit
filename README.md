@@ -4,20 +4,11 @@
 ## Word Summit: The Project
 _An App by The Crunglers_
 
-This app is very fun and easy to install. If it doesn't work, that's on you.
-
-Here's why:
-* It's a simple APK file in the root directory
-* It's foolproof
-* Targets API 32, goes as low as 27
-* Just do it
-
-Your mom enjoyed the app.
-
-Launch the `Word_Summit.apk` in your Android Emulator (or ADB sideload it if you're a nerd) to get started.
+Welcome to Word Summit! The game about testing your knowledge on homophones and synonyms!
 
 ### Built With
 
+* [Android Studio](https://developer.android.com/studio)
 * [Java](https://www.oracle.com/ca-en/java/)
 * [Volley](https://google.github.io/volley/)
 * [DataMuse](https://www.datamuse.com/api/)
@@ -25,23 +16,14 @@ Launch the `Word_Summit.apk` in your Android Emulator (or ADB sideload it if you
 <!-- GETTING STARTED -->
 ## Getting Started
 
-It's really easy.
+It's really simple! The installation file is a single APK file in the repo's root directory.
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-  ```sh
-  sudo mom-install
-  ```
-  
-  (This won't work. Don't do it.)
+* Targets API 32, goes as low as 27
 
 ### Installation
 
-1. Go to Android Emulator
-2. Drag and drop Word_Summit.apk onto the Emulator window
-3. ???
-4. Profit
+Launch the `Word_Summit.apk` in your Android Emulator, or ADB sideload it to get started.
 
 ## Known Issues
 
