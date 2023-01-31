@@ -4,7 +4,7 @@
 ## Word Summit: The Project
 _An App by The Crunglers_
 
-Welcome to Word Summit! The game about testing your knowledge on homophones and synonyms!
+Welcome to Word Summit! The game about testing your knowledge on homophones and synonyms! This app was built in under 24 hours as part of the 2022 Mountain Madness Hackathon at Simon Fraser University, and won 1 of 4 prizes!
 
 ### Built With
 
